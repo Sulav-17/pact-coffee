@@ -8,26 +8,40 @@ var client = contentful.createClient({
     entries.items.forEach(function (entry) {
 
       var carsCollection=document.createElement('div');
-      document.getElementById('all-carsCollection').append(carsCollection);
+      document.getElementById('all-products').append(carsCollection);
 
       var title = document.createElement('h3');
       title.innerHTML = entry.fields.title;
       carsCollection.append(title);
 
-      var Price = document.createElement('p');
-      Price.innerHTML = entry.fields.Price;
-      carsCollection.append(Price);
-
-      
+  
    var cars = document.createElement('img');
       cars.src = 'http:'+entry.fields.cars.fields.file.url;
       carsCollection.append(cars);
 
-      var detailsButton = document.createElement('a');
-      detailsButton.innerHTML = 'Learn More';
-      carsCollection.append(detailsButton);
-      detailsButton.href='details.html?id='+entry.sys.id;
-  
-              
+      var Price = document.createElement('p');
+      Price.innerHTML = entry.fields.Price;
+      carsCollection.append(Price);
+             
     });
   });
+
+
+
+  client.getEntries({content_type:'carShops'}).then(function (entries) {
+    entries.items.forEach(function (entry) {
+      console.log(entry);
+  
+      var carShops = document.createElement('div');
+      coffee.append(carShops);
+  
+      var title = document.createElement('h3');
+      title.innerHTML = entry.fields.name;
+      carShops.append(title);
+  
+      var image = document.createElement('img');
+      image.src = 'http:' + entry.fields.image.fields.file.url;
+      carShops.append(image);
+    });
+  });
+  
